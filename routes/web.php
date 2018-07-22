@@ -10,4 +10,4 @@ Route::get('email/verify', 'Auth\VerificationController@verify')
     ->middleware('signed')
     ->name('email.verify');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/posts', 'PostController')->only(['index', 'show']);
