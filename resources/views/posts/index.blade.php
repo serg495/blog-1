@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">
                         @can('watch full post')
-                        <a class="text-dark" href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                        <a class="text-dark" href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a>
                         @else
                             <a href="{{route('login')}}">читать полностью</a>
                         @endcan
@@ -23,6 +23,10 @@
                             <a href="{{ route('login') }}">читать полностью</a>
                         @endcan
                     </p>
+                </div>
+                <div class="card-body nav justify-content-between">
+                    <a href="#" class="card-link">Like</a>
+                    <a href="#" class="card-link">Views</a>
                 </div>
             </div>
         @endforeach
