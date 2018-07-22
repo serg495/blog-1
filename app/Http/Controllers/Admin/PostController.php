@@ -23,9 +23,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = Post::create($request->all());
-        $post->addMedia($request->file('thumbnail'))->toMediaCollection('images');
+        $post->addMediaFromRequest('thumbnail')->toMediaCollection('images');
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', $post);
     }
 
     public function show(Post $post)
@@ -42,7 +42,10 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return redirect()->route('posts.index');
+        $post->clearMediaCollection('images');
+        $post->addMediaFromRequest('thumbnail')->toMediaCollection('images');
+
+        return redirect()->route('posts.show', $post);
     }
 
     public function destroy(Post $post)

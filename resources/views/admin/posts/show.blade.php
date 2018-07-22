@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>Thumbnail</th>
-                <td>IMAGE</td>
+                <td class="img-thumbnail">{{ $post->getMedia('images')->first() }}</td>
             </tr>
             </tbody>
         </table>
