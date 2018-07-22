@@ -5,10 +5,11 @@ namespace App;
 use App\Notifications\Auth\VerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -19,6 +20,16 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['email_verified_at'];
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     public function markEmailAsVerified(): void
     {
