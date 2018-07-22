@@ -11,5 +11,7 @@ class VerificationController extends Controller
     public function verify(Request $request)
     {
         User::find($request->user)->markEmailAsVerified();
+
+        return redirect()->route('posts.index');
     }
 }
