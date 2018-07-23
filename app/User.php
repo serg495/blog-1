@@ -31,6 +31,16 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function like(Post $post)
+    {
+        $this->likes()->create(['post_id' => $post->id]);
+    }
+
+    public function unlike(Post $post)
+    {
+        $this->likes()->where('post_id', $post->id)->delete();
+    }
+
     public function markEmailAsVerified(): void
     {
         $this->forceFill(['email_verified_at' => now()])->save();

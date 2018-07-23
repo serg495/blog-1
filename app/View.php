@@ -19,4 +19,9 @@ class View extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function view()
+    {
+
+    }
 }
