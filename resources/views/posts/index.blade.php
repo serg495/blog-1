@@ -28,12 +28,10 @@
                 </div>
                 <div class="card-body nav justify-content-between">
                     @can('like post')
-                        <form action="{{ route('like.store', $post) }}" method="post">
-                            @csrf
-                            <button>Like</button>
-                        </form>
+                        <post-like post_id="{{ $post->id }}" is_liked="{{ $post->isLikedBy(auth()->user()) }}"
+                                   likes_count="{{ $post->likesCount() }}">
+                        </post-like>
                     @endcan
-                    <span>{{ $post->likesCount() }} likes</span>
                     <span>{{ $post->viewsCount() }} views</span>
                 </div>
             </div>
