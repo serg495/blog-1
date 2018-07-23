@@ -21,7 +21,7 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ str_limit($post->summary, 50, '...') }}</td>
                     <td>{{ str_limit($post->body, 150, '...') }}</td>
-                    <td>IMAGE</td>
+                    <td><img src="{{ optional( $post->getMedia('images')->first())->getUrl('thumb') }}" alt=""></td>
                     <td class="nav flex-column">
                         <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-success">Show</a>
                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-primary">Edit</a>

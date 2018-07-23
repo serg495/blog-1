@@ -12,21 +12,22 @@
                             <a href="{{route('login')}}">читать полностью</a>
                         @endcan
                     </h5>
+                    <img class="card-img-top" src="{{ optional( $post->getMedia('images')->first())->getUrl('thumb') }}" alt="">
                 </div>
                 <div class="card-body">
                     <p class="card-text font-italic">{{ $post->summary }}</p>
                     <p class="card-text">
                         {{ str_limit($post->body, round(strlen($post->body) / 100 * 30)), '...' }}
                         @can('watch full post')
-                            <a href="{{ route('posts.show', $post->id) }}">читать полностью</a>
+                            <a href="{{ route('post.show', $post->id) }}">читать полностью</a>
                         @else
                             <a href="{{ route('login') }}">читать полностью</a>
                         @endcan
                     </p>
                 </div>
                 <div class="card-body nav justify-content-between">
-                    <a href="#" class="card-link">Like</a>
-                    <a href="#" class="card-link">Views</a>
+                    <span class="glyphicon glyphicon-heart">{{ $post->likes->count() }} likes</span>
+                    <span class="glyphicon glyphicon-eye-open">{{ $post->views->count() }} views</span>
                 </div>
             </div>
         @endforeach

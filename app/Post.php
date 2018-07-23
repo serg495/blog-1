@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\Models\Media;
 
 class Post extends Model implements HasMedia
 {
@@ -29,5 +30,19 @@ class Post extends Model implements HasMedia
         $this->attributes['title'] = $title;
 
         $this->slug = str_slug($title);
+    }
+
+    public function registerMediaCollections()
+    {
+        $this
+            ->addMediaCollection('images')
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('card')
+                    ->width(900)
+                    ->height(500);
+                $this->addMediaConversion('thumb')
+                    ->width(200)
+                    ->height(150);
+            });
     }
 }
