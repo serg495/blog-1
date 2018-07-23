@@ -7,12 +7,13 @@
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">
                         @can('watch full post')
-                        <a class="text-dark" href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a>
+                            <a class="text-dark" href="{{ route('post.show', $post->id) }}">{{ $post->title }}</a>
                         @else
-                            <a href="{{route('login')}}">читать полностью</a>
+                            <p class="text-dark">{{ $post->title }}</p>
                         @endcan
                     </h5>
-                    <img class="card-img-top" src="{{ optional( $post->getMedia('images')->first())->getUrl('thumb') }}" alt="">
+                    <img class="card-img-top" src="{{ optional( $post->getMedia('images')->first())->getUrl('thumb') }}"
+                         alt="">
                 </div>
                 <div class="card-body">
                     <p class="card-text font-italic">{{ $post->summary }}</p>
@@ -26,8 +27,14 @@
                     </p>
                 </div>
                 <div class="card-body nav justify-content-between">
-                    <span class="glyphicon glyphicon-heart">{{ $post->likes->count() }} likes</span>
-                    <span class="glyphicon glyphicon-eye-open">{{ $post->views->count() }} views</span>
+                    @can('like post')
+                        <form action="{{ route('like.store', $post) }}" method="post">
+                            @csrf
+                            <button>Like</button>
+                        </form>
+                    @endcan
+                    <span>{{ $post->likesCount() }} likes</span>
+                    <span>{{ $post->viewsCount() }} views</span>
                 </div>
             </div>
         @endforeach

@@ -14,8 +14,19 @@
                 <p class="card-text">{{ $post->body }}</p>
             </div>
             <div class="card-body nav justify-content-between">
-                <span class="glyphicon glyphicon-heart">{{ $post->likes->count() }} likes</span>
-                <span class="glyphicon glyphicon-eye-open">{{ $post->views->count() }} views</span>
+                @can('like post')
+                    @if($post->isLiked())
+                        <a href="{{ route('like.destroy', $post) }}">
+                            <i class="text-danger fa fa-2x fa-heart"></i>
+                        </a>
+                    @else
+                        <a href="{{ route('like.store', $post) }}">
+                            <i class="text-black-50 text-danger fa fa-2x fa-heart"></i>
+                        </a>
+                    @endif
+                @endcan
+                <span>{{ $post->likesCount() }} likes</span>
+                <span>{{ $post->viewsCount() }} views</span>
             </div>
         </div>
     </div>
