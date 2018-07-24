@@ -12,8 +12,6 @@ class Post extends Model implements HasMedia
 {
     use HasMediaTrait;
 
-    protected $guarded = ['thumbnail'];
-
     protected $perPage = 10;
 
     public function likes(): HasMany
@@ -50,12 +48,12 @@ class Post extends Model implements HasMedia
 
     public function viewsCount(): int
     {
-        return $this->views->count();
+        return $this->views()->count();
     }
 
     public function likesCount(): int
     {
-        return $this->likes->count();
+        return $this->likes()->count();
     }
 
     public function registerMediaCollections(): void

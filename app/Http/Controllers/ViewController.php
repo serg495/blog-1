@@ -25,7 +25,7 @@ class ViewController extends Controller
         ]);
 
         return response()->json([
-            'views_count' => $post->fresh()->viewsCount(),
+            'views_count' => $post->viewsCount(),
         ]);
     }
 }
