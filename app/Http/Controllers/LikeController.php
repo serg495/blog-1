@@ -9,6 +9,7 @@ class LikeController extends Controller
     public function store(Post $post)
     {
         $user = auth()->user();
+
         if ($post->isLikedBy($user)) {
             $user->unlike($post);
         } else {
@@ -16,7 +17,7 @@ class LikeController extends Controller
         }
 
         return response()->json([
-            'likes_count' => $post->likes()->count(),
+            'likes_count' => $post->likesCount(),
             'is_liked' => $post->isLikedBy($user)
         ]);
     }

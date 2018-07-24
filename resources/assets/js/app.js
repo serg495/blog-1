@@ -19,6 +19,7 @@ window.Axios = require('axios').default;
  */
 
 Vue.component('post-like', require('./components/PostLikeComponent.vue'));
+Vue.component('post-view', require('./components/PostViewComponent.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -14,19 +14,14 @@
                 <p class="card-text">{{ $post->body }}</p>
             </div>
             <div class="card-body nav justify-content-between">
-                @can('like post')
-                    @if($post->isLiked())
-                        <a href="{{ route('like.destroy', $post) }}">
-                            <i class="text-danger fa fa-2x fa-heart"></i>
-                        </a>
-                    @else
-                        <a href="{{ route('like.store', $post) }}">
-                            <i class="text-black-50 text-danger fa fa-2x fa-heart"></i>
-                        </a>
-                    @endif
-                @endcan
-                <span>{{ $post->likesCount() }} likes</span>
-                <span>{{ $post->viewsCount() }} views</span>
+                    <div class="card-body nav justify-content-between">
+                        @can('like post')
+                            <post-like post_id="{{ $post->id }}" is_liked="{{ $post->isLikedBy(auth()->user()) }}"
+                                       likes_count="{{ $post->likesCount() }}">
+                            </post-like>
+                        @endcan
+                        <post-view post_id="{{ $post->id }}" views_count="{{ $post->viewsCount() }}"></post-view>
+                    </div>
             </div>
         </div>
     </div>

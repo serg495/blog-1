@@ -38,9 +38,14 @@ class Post extends Model implements HasMedia
         return $this->likes()->where('user_id', $user->id)->exists();
     }
 
-    public function isViewedBy(User $user)
+    public function isViewedByUser(User $user)
     {
         return $this->views()->where('user_id', $user->id)->exists();
+    }
+
+    public function isViewedByIp(string $ip)
+    {
+        return $this->views()->where('user_ip', $ip)->exists();
     }
 
     public function viewsCount()

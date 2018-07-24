@@ -32,7 +32,9 @@
                                    likes_count="{{ $post->likesCount() }}">
                         </post-like>
                     @endcan
-                    <span>{{ $post->viewsCount() }} views</span>
+                    <i class="fa fa-2x fa-eye">
+                        {{ $post->viewsCount() }}
+                    </i>
                 </div>
             </div>
         @endforeach
