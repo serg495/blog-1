@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\JsonResponse;
 
 class LikeController extends Controller
 {
-    public function store(Post $post)
+    public function store(Post $post) : JsonResponse
     {
         $user = auth()->user();
 

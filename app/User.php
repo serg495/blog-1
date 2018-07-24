@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\Auth\VerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,22 +22,22 @@ class User extends Authenticatable
 
     protected $dates = ['email_verified_at'];
 
-    public function likes()
+    public function likes() : HasMany
     {
         return $this->hasMany(Like::class);
     }
 
-    public function posts()
+    public function posts() : HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function like(Post $post)
+    public function like(Post $post) : void
     {
         $this->likes()->create(['post_id' => $post->id]);
     }
 
-    public function unlike(Post $post)
+    public function unlike(Post $post) : void
     {
         $this->likes()->where('post_id', $post->id)->delete();
     }

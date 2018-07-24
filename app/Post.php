@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
-use Illuminate\Support\Facades\Auth;
 
 class Post extends Model implements HasMedia
 {
@@ -16,12 +16,12 @@ class Post extends Model implements HasMedia
 
     protected $perPage = 10;
 
-    public function likes()
+    public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
     }
 
-    public function views()
+    public function views(): HasMany
     {
         return $this->hasMany(View::class);
     }
@@ -38,27 +38,27 @@ class Post extends Model implements HasMedia
         return $this->likes()->where('user_id', $user->id)->exists();
     }
 
-    public function isViewedByUser(User $user)
+    public function isViewedByUser(User $user): bool
     {
         return $this->views()->where('user_id', $user->id)->exists();
     }
 
-    public function isViewedByIp(string $ip)
+    public function isViewedByIp(string $ip): bool
     {
         return $this->views()->where('user_ip', $ip)->exists();
     }
 
-    public function viewsCount()
+    public function viewsCount(): int
     {
         return $this->views->count();
     }
 
-    public function likesCount()
+    public function likesCount(): int
     {
         return $this->likes->count();
     }
 
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this
             ->addMediaCollection('images')

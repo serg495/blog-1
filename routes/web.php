@@ -20,5 +20,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin'], 'namespace' =
 Route::group(['middleware' => ['role:user']], function (){
     Route::post('posts/{post}/like', 'LikeController@store')->name('like.store');
 });
+
 Route::post('posts/{post}/view', 'ViewController@store')->name('view.store');
 
