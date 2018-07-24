@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-    public function store(Request $request, Post $post) : JsonResponse
+    public function store(Request $request, Post $post)
     {
-        dd($user = auth()->user());
+        $user = auth()->user();
 
         if ($post->isViewedByUser($user) || $post->isViewedByIp($request->ip())) {
 

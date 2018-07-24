@@ -15,7 +15,8 @@
         },
 
         mounted() {
-           this.viewsCountLocal = this.views_count
+           this.viewsCountLocal = this.views_count;
+           this.viewPost();
         },
         methods: {
             viewPost() {
