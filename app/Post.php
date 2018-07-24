@@ -10,6 +10,9 @@ use Spatie\MediaLibrary\Models\Media;
 
 class Post extends Model implements HasMedia
 {
+
+    protected $fillable = ['title', 'summary', 'body'];
+
     use HasMediaTrait;
 
     protected $perPage = 10;
