@@ -18,8 +18,5 @@
         "lodash": "^4.17.4",
         "popper.js": "^1.12",
         "vue": "^2.5.16"
-    },
-    "dependencies": {
-        "vue-axios": "^2.1.2"
     }
 }

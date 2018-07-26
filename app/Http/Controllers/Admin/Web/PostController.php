@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\StoreRequest;
 use App\Post;
 
 class PostController extends Controller
@@ -20,7 +20,7 @@ class PostController extends Controller
         return view('admin.posts.create');
     }
 
-    public function store(PostRequest $request)
+    public function store(StoreRequest $request)
     {
         $post = Post::create($request->all());
         $post->addMediaFromRequest('thumbnail')->toMediaCollection('images');
@@ -38,7 +38,7 @@ class PostController extends Controller
         return view('admin.posts.edit', compact('post'));
     }
 
-    public function update(PostRequest $request, Post $post)
+    public function update(StoreRequest $request, Post $post)
     {
         $post->update($request->all());
 
